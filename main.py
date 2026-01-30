@@ -14,8 +14,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Сәлем 👋 Мен тірімін")
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
-    await update.message.reply_text(f"Сен жаздың: {text}")
+    text = update.message.text.lower()
+
+    if "мен туралы не білесің" in text:
+        await update.message.reply_text(
+            "Сен Telegram бот жасап жатқан, беріспейтін адамсың 😎\n"
+            "Қалғанын біртіндеп үйреніп жатырмын."
+        )
+    else:
+        await update.message.reply_text(f"Сен жаздың: {update.message.text}")
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
